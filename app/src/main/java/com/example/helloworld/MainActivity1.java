@@ -1,5 +1,6 @@
 package com.example.helloworld;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
@@ -11,13 +12,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity1 extends AppCompatActivity {
+    public static final int MY_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main1);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -33,5 +34,9 @@ public class MainActivity extends AppCompatActivity {
         int sum = One + Two;
         final EditText resultView = (EditText) findViewById(R.id.editTextNumber3);
         resultView.setText(String.valueOf(sum));
+        Intent intent = new Intent(MainActivity1.this, MainActivity2.class);
+        intent.putExtra("sum", String.valueOf(sum));
+        //startActivity(intent);
+        startActivityForResult(intent, MY_REQUEST_CODE);
     }
 }
